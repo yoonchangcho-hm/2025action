@@ -11,3 +11,13 @@ jobs:
     steps:
       - name: Hello World찍기
         run: echo "hello world"
+
+      - name: 여러문장
+      run:  
+      echo "good"
+      echo "bye"
+      
+      - name: 깃허브변수
+      run:
+        echo $GITHUB_SHA
+        echo $GITHUB_REPOSITORY
