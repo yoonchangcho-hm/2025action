@@ -12,13 +12,14 @@ jobs:
 
     steps:
       - name: ssh to ec2
-        uses: appleboy.ssh/action@v.1.0.3
+        uses: appleboy.ssh/action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd ${{ env.REMOTE_DIR }}
-            git pull
-            npm ci
-            npm run build
+            sudo git config --global --add safe.directory /home/ubuntu/2025action
+            sudo git pull
+            sudo npm ci
+            sudo npm run build
