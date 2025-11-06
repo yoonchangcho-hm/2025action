@@ -1,4 +1,4 @@
-name: github action 실행해보기
+name: react deploy
 on:
   push:
     branches:
@@ -19,7 +19,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd ${{ env.REMOTE_DIR }}
-            pwd
-            # sudo git pull
-            # sudo npm ci
-            # sudo npm run build
+            sudo git config --global --add safe.directory /home/ubuntu/2025action
+            sudo git pull
+            sudo npm ci
+            sudo npm run build
