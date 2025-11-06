@@ -13,9 +13,15 @@ jobs:
         run: echo "hello world"
 
       - name: 여러문장
-        run: echo "good"
+        run: |
+          echo "good"
           echo "bye"
 
       - name: 깃허브변수
-        run: echo $GITHUB_SHA
+        run: |
+          echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY
+
+      - name: 깃액션 secret
+        run: |
+          echo ${{ secrets.MY_NAME }}
