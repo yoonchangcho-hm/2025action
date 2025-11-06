@@ -7,21 +7,18 @@ on:
 jobs:
   My-deploy-Job:
     runs-on: ubuntu-latest
+    env:
+      REMOTE_DIR: /home/ubuntu/2025action
 
     steps:
-      - name: Hello World찍기
-        run: echo "hello world"
-
-      - name: 여러문장
-        run: |
-          echo "good"
-          echo "bye"
-
-      - name: 깃허브변수
-        run: |
-          echo $GITHUB_SHA
-          echo $GITHUB_REPOSITORY
-
-      - name: 깃액션 secret
-        run: |
-          echo ${{ secrets.MY_NAME }}
+      - name: ssh to ec2
+        uses: appleboy.ssh/action@v.1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ${{ env.REMOTE_DIR }}
+            git pull
+            npm ci
+            npm run build
